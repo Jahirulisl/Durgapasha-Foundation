@@ -5,8 +5,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 //from crusel react osam en
 
 //import for banner img from assast home pictures start
-import img1 from '../../../assets/home/01.jpg'
-import img2 from '../../../assets/home/02.jpg'
+import img1 from '../../../assets/home/bannerf.jpg'
+import img2 from '../../../assets/home/Teacher.jpg'
 import img3 from '../../../assets/home/03.png'
 import img4 from '../../../assets/home/04.jpg'
 import img5 from '../../../assets/home/05.png'
