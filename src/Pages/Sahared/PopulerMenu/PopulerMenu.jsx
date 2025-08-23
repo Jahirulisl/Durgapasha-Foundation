@@ -20,7 +20,11 @@ const PopulerMenu = () => {
 
   return (
     <section>
-     <SectionTitle></SectionTitle>
+     <SectionTitle
+        subHeading={"your program"}
+        heading={"calender menu"}>
+
+     </SectionTitle>
       <div className='grid md:grid-cols-2 gap-6'>
         {menu.map((item) => (
          <MenuItem
