@@ -1,14 +1,14 @@
 
-import React from 'react';
 
 const MenuItem = ({item}) => {
   const {name,image,price,recipe} = item;
   return (
     <div>
-      <img src={image} alt="" />
+      <img className="w-[120px]" src={image} alt="" />
       <div>
-        <h3>{name}----</h3>
-        <p>{price}</p>
+        <h3 className='uppercase'>{name}----</h3>
+        <p>{recipe}</p>
+        <p className="text-yellow-400">${price}</p>
       </div>
     </div>
   );
