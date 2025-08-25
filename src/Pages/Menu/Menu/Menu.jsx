@@ -1,8 +1,12 @@
-import React from 'react';
-
+// for helmet start
+import { Helmet} from 'react-helmet-async';
 const Menu = () => {
   return (
-    <div>min min menu</div>
+    <div>
+      <Helmet>
+        <title> Eduction | Munu</title>
+      </Helmet>
+    </div>
   );
 };
 

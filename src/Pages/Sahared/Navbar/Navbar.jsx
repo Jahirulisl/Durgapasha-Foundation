@@ -5,7 +5,7 @@ import logo1 from '../../../assets/home/logo.jpg';
 const Navbar = () => {
   const navOptions = <>
     <li><Link to='/'>Home</Link></li>
-    <li><Link to='menu'>Home</Link></li>
+    <li><Link to='menu'>Our Menu</Link></li>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/'>Home</Link></li>

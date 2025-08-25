@@ -5,11 +5,14 @@ import Catagory from "../Category/Category";
 import Featured from "../Featured/Featured";
 import Testimonials from "../Testimonials/Testimonials";
 
-
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Eduction | Home</title>
+      </Helmet>
       <Banner></Banner>
       <Catagory></Catagory>
       <Templet></Templet>
