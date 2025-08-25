@@ -1,7 +1,16 @@
-import React from 'react';
+
 import logo1 from '../../../assets/home/logo.jpg';
+ import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const navOptions = <>
+    <li><Link to='/'>Home</Link></li>
+    <li><Link to='menu'>Home</Link></li>
+    <li><Link to='/'>Home</Link></li>
+    <li><Link to='/'>Home</Link></li>
+    <li><Link to='/'>Home</Link></li>
+  
+  </>
   return (
     <div>
       <div className="navbar max-w-screen-xl mx-auto fixed z-10 bg-opacity-30 bg-black text-white">
@@ -11,10 +20,7 @@ const Navbar = () => {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52">
-              <li><a>Item 1</a></li>
-              <li><a>Item 2</a></li>
-              <li><a>Item 3</a></li>
-              <li><a>Item 4</a></li>
+             {navOptions}
             </ul>
           </div>
           <div className='flex'>
@@ -24,10 +30,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
-            <li><a>Item 3</a></li>
-            <li><a>Item 4</a></li>
+            {navOptions}
           </ul>
         </div>
         <div className="navbar-end">
