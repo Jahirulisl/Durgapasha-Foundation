@@ -20,7 +20,7 @@ const Featured = () => {
         <div className="md:ml-10 space-y-4">
           <p>Aug 20, 2009</p>
           <p className="uppercase">Jahir</p>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam, est et perspiciatis sequi odit tempore praesentium esse alias fugit hic. Temporibus ducimus officiis eligendi perferendis quibusdam facere incidunt eius voluptatem?</p>
+          <p>গ্রামের ছাত্ররা অনেক সময় সুযোগ থেকে বঞ্চিত হয়, তাই একজন যত্নবান শিক্ষকই তাদের আশার আলো,শিক্ষকের স্নেহ আর যত্নই ছাত্রকে বইয়ের অক্ষর থেকে জীবনের পাঠ শেখায়,</p>
           <button className="btn btn-primary">Order Now</button>
         </div>
       </div>
