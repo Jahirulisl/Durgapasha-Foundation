@@ -12,6 +12,18 @@ const Menu = () => {
       </Helmet>
       <Cover img ={coverImg} title="Our Munu"></Cover>
       <PopulerMenu></PopulerMenu>
+
+      <Helmet>
+        <title> Eduction | Munu</title>
+      </Helmet>
+      <Cover img ={coverImg} title="Our Munu"></Cover>
+      <PopulerMenu></PopulerMenu>
+
+      <Helmet>
+        <title> Eduction | Munu</title>
+      </Helmet>
+      <Cover img ={coverImg} title="Our Munu"></Cover>
+      <PopulerMenu></PopulerMenu>
     </div>
   );
 };
