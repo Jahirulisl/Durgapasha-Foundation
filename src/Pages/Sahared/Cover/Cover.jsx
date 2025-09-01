@@ -4,7 +4,7 @@ const Cover = ({ img, title }) => {
   return (
 
     <Parallax
-    blur={{ min: -15, max: 15 }}
+      blur={{ min: -15, max: 15 }}
       bgImage={img}
       bgImageAlt="the dog"
       strength={-200}
@@ -17,10 +17,10 @@ const Cover = ({ img, title }) => {
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold uppercase">{title}</h1>
             <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-              quasi. In deleniti eaque aut repudiandae et a id nisi.
+              বহুমান্য রেজাল্টকারীদের সম্মাননা ও পুরস্কার প্রদান করা হবে।
+              উৎকৃষ্ট ফলাফলকারীদের প্রণোদনা ও স্কলারশিপ—আদর্শ ভবিষ্যতের জন্য।
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <button className="btn btn-primary">পুরস্কার তালিকা</button>
           </div>
         </div>
       </div>

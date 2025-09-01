@@ -1,29 +1,45 @@
 // for helmet start
-import { Helmet} from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 import Cover from '../../Sahared/Cover/Cover';
+
+import dessertImg from "../../../assets/menu/bag.jpg";
+import crestImg from "../../../assets/home/crest.jpg";
+import sonodImg from "../../../assets/menu/sonod.jpg";
+
 //for cover img start
 import coverImg from '../../../assets/menu/clenderimg.jpg'
-import PopulerMenu from '../../Sahared/PopulerMenu/PopulerMenu';
+import useMenu from '../../../hooks/useMenu';
+
+import SectionTitle from '../../../Components/SectionTitle';
+import MunuCategory from './MunuCategory/MunuCategory';
+
 const Menu = () => {
+  //import use hooks start
+  const [menu] = useMenu();
+
+  //import from menu.json start all category
+  const dessert = menu.filter(item => item.category === 'dessert');
+  const salad = menu.filter(item => item.category === 'salad');
+  const offered = menu.filter(item => item.category === 'offered');
+  const drinks = menu.filter(item => item.category === 'drinks');
+  const soup = menu.filter(item => item.category === 'soup');
+  //import from menu.json end all category
   return (
     <div>
       <Helmet>
         <title> Eduction | Munu</title>
       </Helmet>
-      <Cover img ={coverImg} title="Our Munu"></Cover>
-      <PopulerMenu></PopulerMenu>
+      <Cover img={coverImg} title="জ্ঞানের জন্য পুরস্কার"></Cover>
 
-      <Helmet>
-        <title> Eduction | Munu</title>
-      </Helmet>
-      <Cover img ={coverImg} title="Our Munu"></Cover>
-      <PopulerMenu></PopulerMenu>
+      <SectionTitle
+        subHeading="মিস করবেন না" heading="জিপিএ-৫ অর্জন সম্মাননা"
+      >
+      </SectionTitle>
 
-      <Helmet>
-        <title> Eduction | Munu</title>
-      </Helmet>
-      <Cover img ={coverImg} title="Our Munu"></Cover>
-      <PopulerMenu></PopulerMenu>
+      <MunuCategory items={dessert} title="Desert" img={dessertImg}></MunuCategory>
+      <MunuCategory items={dessert} title="crest" img={crestImg}></MunuCategory>
+      <MunuCategory items={dessert} title="sonod" img={sonodImg}></MunuCategory>
+
     </div>
   );
 };
