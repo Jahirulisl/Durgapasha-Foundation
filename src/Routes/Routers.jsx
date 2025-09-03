@@ -6,6 +6,7 @@
 import Home from "../Pages/Home/Home/Home";
 import Main from "../Layout/Main";
 import Menu from "../Pages/Menu/Menu/Menu";
+import OrderGift from "../Pages/Order/Order/OrderGift";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path:"menu",
         element:<Menu></Menu>
+      },
+      {
+        path: "ordergift",
+        element: <OrderGift></OrderGift>
       },
     ]
   },

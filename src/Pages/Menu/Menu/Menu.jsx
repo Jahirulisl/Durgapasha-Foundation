@@ -36,9 +36,9 @@ const Menu = () => {
       >
       </SectionTitle>
 
-      <MunuCategory items={dessert} title="Desert" img={dessertImg}></MunuCategory>
-      <MunuCategory items={dessert} title="crest" img={crestImg}></MunuCategory>
-      <MunuCategory items={dessert} title="sonod" img={sonodImg}></MunuCategory>
+      <MunuCategory items={dessert} title="ব্যাগ" img={dessertImg}></MunuCategory>
+      <MunuCategory items={dessert} title="প্রতীকচিহ্ন" img={crestImg}></MunuCategory>
+      <MunuCategory items={dessert} title="সনদপত্র" img={sonodImg}></MunuCategory>
 
     </div>
   );
