@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import Cover from '../../../Sahared/Cover/Cover';
 import MenuItem from '../../../Sahared/MenuItems/MenuItem';
 
@@ -13,6 +14,9 @@ const MunuCategory = ({items, title, img}) => {
           </MenuItem>
         ))}
       </div>
+        <Link to="/ordergift">
+        <button className="btn btn-outline border-0 border-b-4 mt-4">Order Now</button>
+      </Link>
     </div>
   );
 };
