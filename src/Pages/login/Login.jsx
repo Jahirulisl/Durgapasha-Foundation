@@ -1,10 +1,14 @@
 //for captcha import start 
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../providers/AuthProvider';
 
 //for captcha import end 
 
 const Login = () => {
+  //FROM AUTHPROVIDER START
+   const {signIn} = useContext(AuthContext);
+   //FROM AUTHPROVIDER END
 
    // for captcha validate ref
    const captchaRef = useRef(null);
@@ -21,6 +25,13 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+
+     signIn(email,password)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+    })
+    
   }
 
    //for validate captcha start
