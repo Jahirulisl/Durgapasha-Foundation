@@ -2,23 +2,25 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 //for captcha import end 
 
 const Login = () => {
   //FROM AUTHPROVIDER START
-   const {signIn} = useContext(AuthContext);
-   //FROM AUTHPROVIDER END
+  const { signIn } = useContext(AuthContext);
+  //FROM AUTHPROVIDER END
 
-   // for captcha validate ref
-   const captchaRef = useRef(null);
-    //for valedate captcah true
-   const [disabled,setDisabled] = useState(true);
-    //for captcha strt
-    useEffect(() =>{
-      loadCaptchaEnginge(6);
-    },[]);
-    //for captcha end
+  // for captcha validate ref
+  const captchaRef = useRef(null);
+  //for valedate captcah true
+  const [disabled, setDisabled] = useState(true);
+  //for captcha strt
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+  //for captcha end
   const handleLogin = event => {
     event.preventDefault();
     const form = event.target;
@@ -26,70 +28,77 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
 
-     signIn(email,password)
-    .then(result => {
-      const user = result.user;
-      console.log(user);
-    })
-    
+    signIn(email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+
   }
 
-   //for validate captcha start
+  //for validate captcha start
 
-const handleValidateCattcha=()=>{
+  const handleValidateCattcha = () => {
     const user_captcha_value = captchaRef.current.value;
-    if (validateCaptcha(user_captcha_value)){
-     setDisabled(false);
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
     }
   }
-//for validate captcha end
-  
+  //for validate captcha end
+
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col md:flex-row-reverse">
-        <div className="text-center md:w-1/2 lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-            quasi. In deleniti eaque aut repudiandae et a id nisi.
-          </p>
-        </div>
-        <div className="card md:w-1/2 bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form onSubmit={handleLogin}
-            className="card-body">
+    <>
+      <Helmet>
+        <title>Education | logIn</title>
+      </Helmet>
 
-            <div className="form-control">
-              <label className="label">Email</label>
-              <input type="email"
-                name="email"
-                className="input" placeholder="Email" />
-            </div>
+      <div className="hero bg-base-200 min-h-screen">
+        <div className="hero-content flex-col md:flex-row-reverse">
+          <div className="text-center md:w-1/2 lg:text-left">
+            <h1 className="text-5xl font-bold">Login now!</h1>
+            <p className="py-6">
+              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+              quasi. In deleniti eaque aut repudiandae et a id nisi.
+            </p>
+          </div>
+          <div className="card md:w-1/2 bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <form onSubmit={handleLogin}
+              className="card-body">
 
-            <div className="form-control">
-              <label className="label">Password</label>
+              <div className="form-control">
+                <label className="label">Email</label>
+                <input type="email"
+                  name="email"
+                  className="input" placeholder="Email" />
+              </div>
 
-              <input type="password"
-                name="password"
-                className="input" placeholder="Password" />
-            </div>
-             {/* fOR CAPTCHA START */}
-             <div className="form-control">
-              <label>
-                <LoadCanvasTemplate />
-              </label>
-              <input type="text"
-                ref={captchaRef}
-                name="captcha"
-                className="input" placeholder="type captcha get above" />
+              <div className="form-control">
+                <label className="label">Password</label>
+
+                <input type="password"
+                  name="password"
+                  className="input" placeholder="Password" />
+              </div>
+              {/* fOR CAPTCHA START */}
+              <div className="form-control">
+                <label>
+                  <LoadCanvasTemplate />
+                </label>
+                <input type="text"
+                  ref={captchaRef}
+                  name="captcha"
+                  className="input" placeholder="type captcha get above" />
                 <button onClick={handleValidateCattcha} className='btn btn-outline mt-4'>vaildeted</button>
-            </div>
-            {/* fOR CAPTCHA END */}
+              </div>
+              {/* fOR CAPTCHA END */}
 
-            <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
-          </form>
+              <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
+            </form>
+            <p><small>New Here? <Link to="/signup">Create an account</Link></small></p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
