@@ -2,10 +2,15 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   //user informotion ta nia asbo from authProvider
  const {createUser} = useContext(AuthContext);
+
+ //for navigat go login>
+ const navigate = useNavigate();
 
   //from react hooks form start
   const { register, handleSubmit, formState: { errors }, } = useForm();
@@ -16,6 +21,17 @@ const SignUp = () => {
     .then(result =>{
       const loggedUser = result.user;
       console.log(loggedUser);
+      //for sweet alart start
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Login seuccessfully now",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              //for sweet alart end
+              //for navigate login
+              navigate("/login")
     })
   };
 
@@ -27,7 +43,7 @@ const SignUp = () => {
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col md:flex-row-reverse">
           <div className="text-center md:w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+            <h1 className="text-5xl font-bold">Register Now!</h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
               quasi. In deleniti eaque aut repudiandae et a id nisi.
@@ -99,6 +115,7 @@ const SignUp = () => {
                 <input className="btn btn-primary" type="submit" value="Sign Up" />
               </div>
             </form>
+            <p><small>Alrady have an account <Link to="/login">Login</Link></small></p>
           </div>
         </div>
       </div>
