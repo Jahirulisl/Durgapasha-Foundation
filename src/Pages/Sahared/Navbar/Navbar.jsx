@@ -7,17 +7,19 @@ import { AuthContext } from '../../../providers/AuthProvider';
 const Navbar = () => {
   //for user and logOut eccess korbo
   const {user,logOut} =useContext(AuthContext);
-  //logout ta handle korar jonnno
+  //logout ta handle korar jonnno start
   const handleLogOut = () =>{
      logOut()
      .then(()=>{})
      .catch(error => console.log(error));
   }
+  //logout ta handle korar jonnno end
+
   const navOptions = <>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='menu'>Our Menu</Link></li>
     <li><Link to='ordergift'>Order Gift</Link></li>
-    {/* for logout and user */}
+    {/* for logout and user start */}
     {
       user ? <>
        <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
@@ -25,6 +27,7 @@ const Navbar = () => {
       <li><Link to='login'>Log In</Link></li>
       </>
     }
+    {/* for logout and user end*/}
   
   </>
   return (

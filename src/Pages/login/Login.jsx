@@ -1,9 +1,10 @@
 //for captcha import start 
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 //for captcha import end 
 
@@ -12,8 +13,9 @@ const Login = () => {
   const { signIn } = useContext(AuthContext);
   //FROM AUTHPROVIDER END
 
-  // for captcha validate ref
-  const captchaRef = useRef(null);
+  //for navigate and go home page
+  const navigate = useNavigate();
+
   //for valedate captcah true
   const [disabled, setDisabled] = useState(true);
   //for captcha strt
@@ -32,14 +34,26 @@ const Login = () => {
       .then(result => {
         const user = result.user;
         console.log(user);
+        //for sweet alart start
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login seuccessfully now",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        //for sweet alart end
+
+        //foro go home page use navigate
+        navigate("/");
       })
 
   }
 
   //for validate captcha start
 
-  const handleValidateCattcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCattcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     }
@@ -84,11 +98,9 @@ const Login = () => {
                 <label>
                   <LoadCanvasTemplate />
                 </label>
-                <input type="text"
-                  ref={captchaRef}
+                <input onBlur={handleValidateCattcha} type="text"
                   name="captcha"
                   className="input" placeholder="type captcha get above" />
-                <button onClick={handleValidateCattcha} className='btn btn-outline mt-4'>vaildeted</button>
               </div>
               {/* fOR CAPTCHA END */}
 
