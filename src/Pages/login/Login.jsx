@@ -2,7 +2,7 @@
 import { useContext, useEffect,useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 
@@ -15,6 +15,13 @@ const Login = () => {
 
   //for navigate and go home page
   const navigate = useNavigate();
+
+  //for location start>
+  const location = useLocation();
+
+  //for from start
+
+  const from = location.state?.from.pathname || "/"
 
   //for valedate captcah true
   const [disabled, setDisabled] = useState(true);
@@ -45,7 +52,7 @@ const Login = () => {
         //for sweet alart end
 
         //foro go home page use navigate
-        navigate("/");
+        navigate(from,{replace: true});
       })
 
   }
