@@ -7,13 +7,15 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
   //user informotion ta nia asbo from authProvider
- const {createUser} = useContext(AuthContext);
+ const {createUser,updateUserProfile} = useContext(AuthContext);
 
  //for navigat go login>
  const navigate = useNavigate();
-
   //from react hooks form start
-  const { register, handleSubmit, formState: { errors }, } = useForm();
+ 
+  //for useform come react hook from start
+  const { register, handleSubmit,reset, formState: { errors }, } = useForm();
+  //for useform come react hook from end>
 
     const onSubmit = data => {
     console.log(data);
@@ -21,6 +23,12 @@ const SignUp = () => {
     .then(result =>{
       const loggedUser = result.user;
       console.log(loggedUser);
+        //start update profile
+      updateUserProfile(data.name,data.PhotoUrl)
+      .then(()=>{
+        console.log('user profile info update')
+        reset();
+      })
       //for sweet alart start
               Swal.fire({
                 position: "top-end",
@@ -28,11 +36,13 @@ const SignUp = () => {
                 title: "Login seuccessfully now",
                 showConfirmButton: false,
                 timer: 1500
-              });
+              })
+              .catch(error => console.log(error));
               //for sweet alart end
               //for navigate login
-              navigate("/login")
+              navigate("/")
     })
+    
   };
 
   return (
