@@ -1,11 +1,39 @@
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 const FoodCard = ({item}) => {
   //from category item start
   const {name,image,price,recipe} = item;
+  
+  //for navigate other page start
+  const navigate = useNavigate();
 
+  //for user information start
+    const { user } = useAuth();
   //for handle card 
    const hnadleAddToCart = food =>{
-    console.log(food);
+    if (user && user.email){
+       //TODO: send cart item to the database
+     console.log("User logged in:", user.email);
+    }
+    else {
+        //alart message start>
+      Swal.fire({
+        title: "You are Not Logged In",
+        text: "You won't be able to revert thisplase login to add to the cart?!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "yes, loggin"
+      }).then((result) => {
+        if (result.isConfirmed) {
+           //send the user to the login page 
+           navigate('/login')
+        }
+      });
+      //alart message end>
+    }
   }
 
   return (
