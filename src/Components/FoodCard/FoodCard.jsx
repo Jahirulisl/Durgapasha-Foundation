@@ -2,6 +2,12 @@
 const FoodCard = ({item}) => {
   //from category item start
   const {name,image,price,recipe} = item;
+
+  //for handle card 
+   const hnadleAddToCart = food =>{
+    console.log(food);
+  }
+
   return (
     //card from daisyui khala start
     <div className="card bg-base-100 w-96 shadow-sm">
@@ -15,7 +21,7 @@ const FoodCard = ({item}) => {
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Add to card</button>
+          <button onClick={hnadleAddToCart} className="btn btn-primary">Add to card</button>
         </div>
       </div>
     </div>
