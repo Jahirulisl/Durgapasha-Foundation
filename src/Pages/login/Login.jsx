@@ -21,7 +21,8 @@ const Login = () => {
 
   //for from start
 
-  const from = location.state?.from.pathname || "/"
+  const from = location.state?.from?.pathname || "/"
+  console.log('state in the location login page', location.state);
 
   //for valedate captcah true
   const [disabled, setDisabled] = useState(true);
@@ -105,13 +106,14 @@ const Login = () => {
                 <label>
                   <LoadCanvasTemplate />
                 </label>
-                <input onBlur={handleValidateCattcha} type="text"
+                <input onBlur=
+                {handleValidateCattcha} type="text"
                   name="captcha"
                   className="input" placeholder="type captcha get above" />
               </div>
               {/* fOR CAPTCHA END */}
-
-              <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
+                  {/* TODO :apply disabled for re captcha */}
+              <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
             </form>
             <p><small>New Here? <Link to="/signup">Create an account</Link></small></p>
           </div>
