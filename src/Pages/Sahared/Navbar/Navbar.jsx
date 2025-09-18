@@ -6,8 +6,13 @@ import { AuthContext } from '../../../providers/AuthProvider';
 
 // for shoping cart 
 import { FaCartPlus } from "react-icons/fa6";
+import useCart from '../../../hooks/useCart';
+// for tan Stock quary
 
 const Navbar = () => {
+    //for quary tan stock
+  const [cart] = useCart();
+
   //for user and logOut eccess korbo
   const { user, logOut } = useContext(AuthContext);
   //logout ta handle korar jonnno start
@@ -29,7 +34,7 @@ const Navbar = () => {
     <li>
       <Link to="/">
         <button className="btn">
-          <FaCartPlus > </FaCartPlus > <div className="badge badge-sm badge-secondary">+0</div>
+          <FaCartPlus > </FaCartPlus > <div className="badge badge-sm badge-secondary">+{cart.length}</div>
         </button>
       </Link>
     </li>
