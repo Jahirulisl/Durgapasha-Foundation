@@ -2,33 +2,36 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecur from "../../hooks/useAxiosSecure";
-const FoodCard = ({item}) => {
+import useCart from "../../hooks/useCart";
+const FoodCard = ({ item }) => {
+  //for refetch super power
+  const [, refetch] = useCart();
   //from category item start
-  const {name,image,price,recipe,_id} = item;
+  const { name, image, price, recipe, _id } = item;
   //for useAxiosSecur hook import
   const axiosSecure = useAxiosSecur();
 
   //for location get us state
- const locaion = useLocation();
-  
+  const locaion = useLocation();
+
   //for navigate other page start
   const navigate = useNavigate();
 
   //for user information start
-    const { user } = useAuth();
+  const { user } = useAuth();
   //for handle card 
-   const hnadleAddToCart = food =>{
-    if (user && user.email){
-       //TODO: send cart item to the database
-     console.log("User logged in:", user.email,food);
+  const hnadleAddToCart = food => {
+    if (user && user.email) {
+      //TODO: send cart item to the database
+      console.log("User logged in:", user.email, food);
       const cartItem = {
-         menuId:_id,
-         email: user.email,
-         name,
-         image,
-         price
-     }
-     axiosSecure.post('/carts', cartItem)
+        menuId: _id,
+        email: user.email,
+        name,
+        image,
+        price
+      }
+      axiosSecure.post('/carts', cartItem)
         .then(res => {
           console.log(res.data)
           if (res.data.insertedId) {
@@ -39,12 +42,15 @@ const FoodCard = ({item}) => {
               showConfirmButton: false,
               timer: 1500
             });
+            //for refetch the cart to update the cart items count
+            refetch();
+
           }
         })
 
     }
     else {
-        //alart message start>
+      //alart message start>
       Swal.fire({
         title: "You are Not Logged In",
         text: "You won't be able to revert thisplase login to add to the cart?!",
@@ -55,8 +61,8 @@ const FoodCard = ({item}) => {
         confirmButtonText: "yes, loggin"
       }).then((result) => {
         if (result.isConfirmed) {
-           //send the user to the login page 
-           navigate('/login', {state:{from: locaion}})
+          //send the user to the login page 
+          navigate('/login', { state: { from: locaion } })
         }
       });
       //alart message end>
@@ -75,9 +81,11 @@ const FoodCard = ({item}) => {
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>
+
         <div className="card-actions justify-end">
-          <button onClick={() => hnadleAddToCart(item)} className="btn btn-primary">Add to card</button>
+          <button onClick={ hnadleAddToCart} className="btn btn-outline border-0 border-orange-400 bg-slate-100 border-b-4 mt-4">Add to card</button>
         </div>
+
       </div>
     </div>
     //card from daisyui khala start
