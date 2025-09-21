@@ -1,8 +1,11 @@
 import { FaAd, FaCalendar, FaHome, FaSearch, FaShoppingCart } from "react-icons/fa";
 import { FaList } from "react-icons/fa6";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 const Deshboard = () => {
+  //for my cart length show in my cart
+  const [cart] = useCart();
   return (
     <div className="flex">
       {/*dash board site bar  */}
@@ -16,7 +19,7 @@ const Deshboard = () => {
           </li>
 
           <li>
-            <NavLink to="/deshboard/cart"> <FaShoppingCart></FaShoppingCart>my cart</NavLink>
+            <NavLink to="/deshboard/cart"> <FaShoppingCart></FaShoppingCart>my cart({cart.length})</NavLink>
           </li>
 
           <li>
