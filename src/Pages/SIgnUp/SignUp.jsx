@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
+   //for get axiospublic useAxiosPublic hook
+  const axiospublic = useAxiosPublic();
   //user informotion ta nia asbo from authProvider
  const {createUser,updateUserProfile} = useContext(AuthContext);
 
@@ -27,22 +30,32 @@ const SignUp = () => {
       updateUserProfile(data.name,data.PhotoUrl)
       .then(()=>{
         console.log('user profile info update')
-        reset();
-      })
-      //for sweet alart start
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Login seuccessfully now",
-                showConfirmButton: false,
-                timer: 1500
+         //create user entry in the database start
+         const userInfo = {
+              name: data.name,
+              email: data.email,
+            }
+         axiospublic.post('/users', userInfo) 
+          .then(res => {
+                if (res.data.insertedId){
+                  console.log('user added to the data base')
+                  reset();
+                  //for sweet alart start
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "User Created Successfull.",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                 navigate('/')
+                }
               })
-              .catch(error => console.log(error));
-              //for sweet alart end
-              //for navigate login
-              navigate("/")
-    })
-    
+          })
+          .catch(error => console.log(error));
+        //for go login
+      })
+       //create user entry in the database end
   };
 
   return (
