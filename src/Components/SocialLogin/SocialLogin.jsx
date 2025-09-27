@@ -11,7 +11,7 @@ const SocialLogin = () => {
   //for navigate in user checking step 3 end
 
   const { googleSignIn } = useAuth();
-  //for on click google button
+  //for on click google button 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then(result => {
