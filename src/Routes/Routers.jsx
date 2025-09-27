@@ -10,6 +10,7 @@ import PrivateRoute from "./Privates/PrivateRoute";
 import Secrte from "../Pages/Sahared/Secret/Secrte";
 import Deshboard from "../Layout/Deshboard";
 import Cart from "../Pages/Deshboard/Cart/Cart";
+import AllUsers from "../Pages/Deshboard/AllUsers/Allusers";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path:'cart',
         element:<Cart></Cart>,
+      },
+      {
+        path:'allusers',
+        element:<AllUsers></AllUsers>
       }
     ]
 
