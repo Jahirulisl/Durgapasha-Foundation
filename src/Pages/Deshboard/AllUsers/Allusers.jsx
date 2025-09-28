@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 import useAxiosSecur from "../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
-  
+
   const axiosSecure = useAxiosSecur();
-  const { data: users = [],refetch } = useQuery({
+  const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const res = await axiosSecure.get('/users');
@@ -16,31 +16,51 @@ const AllUsers = () => {
     }
   })
 
+  //make user handleMakeAdmin start
+  const handleMakeAdmin = user => {
+    axiosSecure.patch(`/users/admin/${user._id}`)
+      .then(res => {
+        console.log(res.data)
+        if (res.data.modifiedCount > 0){
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an admin Now!`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+          
+      })
+  }
+  //make user handleMakeAdmin end
+
   //make handledelete  and add sweet alart
   const handleDelete = user => {
-   Swal.fire({
-         title: "Are you sure?",
-         text: "You won't be able to revert this!",
-         icon: "warning",
-         showCancelButton: true,
-         confirmButtonColor: "#3085d6",
-         cancelButtonColor: "#d33",
-         confirmButtonText: "Yes, delete it!"
-       }).then((result) => {
-         if (result.isConfirmed) {
-          axiosSecure.delete(`/users/${user._id}`)
-          .then(res =>{
-           if(res.data.deletedCount > 0){
-            Swal.fire({
-             title: "Deleted!",
-             text: "Your file has been deleted.",
-             icon: "success"
-           });
-           refetch();
-           }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`)
+          .then(res => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+              refetch();
+            }
           })
-         }
-       });
+      }
+    });
   }
   return (
     <div>
@@ -68,9 +88,10 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button onClick={() => handleDelete(user)} className="btn btn-lg  bg-orange-500">
+                  {user.role === 'admin'? 'Admin' :<button onClick={() => handleMakeAdmin(user)} className="btn btn-lg  bg-orange-500">
                     <FaUser className='text-white text-2xl'></FaUser>
                   </button>
+                  }
                 </td>
                 <td>
                   <button onClick={() => handleDelete(user)} className="btn btn-ghost btn-lg">
