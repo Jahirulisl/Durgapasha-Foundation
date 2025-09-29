@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-
 import { FaTrashAlt } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import Swal from "sweetalert2";
 import useAxiosSecur from "../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
-
   const axiosSecure = useAxiosSecur();
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
@@ -15,7 +13,6 @@ const AllUsers = () => {
       return res.data;
     }
   })
-
   //make user handleMakeAdmin start
   const handleMakeAdmin = user => {
     axiosSecure.patch(`/users/admin/${user._id}`)
@@ -31,7 +28,6 @@ const AllUsers = () => {
             timer: 1500
           });
         }
-          
       })
   }
   //make user handleMakeAdmin end
