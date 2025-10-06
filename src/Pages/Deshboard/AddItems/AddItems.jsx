@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 
 //import imgbb  hosting url start
 const image_hostion_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-
+console.log("ImgBB API Key:", image_hostion_key); 
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hostion_key}`
 //import imgbb  hosting url end
 
@@ -20,11 +20,17 @@ const AddItems = () => {
   const axiosSecqure = useAxiosSecur();
 
   const { register, handleSubmit,reset} = useForm();
+
   const onSubmit = async (data) => {
     console.log(data)
+
+     // image upload to imgbb
+  const formData = new FormData();
+  formData.append('image', data.image[0]);
+
     //image upload to imgbb and then get an url start
-    const imageFile = { image: data.image[0] }
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+    
+    const res = await axiosPublic.post(image_hosting_api,  formData, {
       headers: {
         'content-type': 'multipart/form-data'
       }
@@ -36,7 +42,7 @@ const AddItems = () => {
         category: data.category,
         price: parseFloat(data.price),
         recipe: data.recipe,
-        image: res.data.display_url
+        image: res.data.data.display_url
       }
       //now send the menu item data to the server with the image end
       //
