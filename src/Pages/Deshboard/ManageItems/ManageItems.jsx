@@ -4,12 +4,13 @@ import SectionTitle from '../../../Components/SectionTitle';
 import useMenu from '../../../hooks/useMenu';
 import Swal from 'sweetalert2';
 import useAxiosSecur from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 
 const ManageItems = () => {
-  const [menu,refetch] = useMenu();
+  const [menu, refetch] = useMenu();
   //come token use AxiousSecure
-  const axiousSecure = useAxiosSecur();
+  const axiosSecure = useAxiosSecur();
 
   //for delete handle start
   const handleDeleteItems = (item) => {
@@ -23,10 +24,10 @@ const ManageItems = () => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axiousSecure.delete(`/menu/${item._id}`);
-        // console.log(res.data);
-        if (res.data.deletedCount > 0){
-           refetch();
+        const res = await axiosSecure.delete(`/menu/${item._id}`);
+        console.log(res.data);
+        if (res.data.deletedCount > 0) {
+          refetch();
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -86,11 +87,31 @@ const ManageItems = () => {
                     {item.name}
                   </td>
                   <td className='text-right'>${item.price}</td>
-                  <td>
+                  {/* <td>
                     <button className="btn btn-ghost btn-lg bg-orange-500 hover:bg-orange-100">
                       <FaEdit className='text-white '></FaEdit>
                     </button>
-                  </td>
+                  </td> */}
+
+                  {/* Update button start */}
+
+                  
+                    <td>
+                      <Link to={`/dashboard/updateItem/${item._id}`}>
+                        <button className="btn btn-ghost btn-lg bg-orange-500 hover:bg-orange-100">
+                          <FaEdit className='text-white '></FaEdit>
+                        </button>
+                      </Link>
+                    </td>
+
+                  
+
+                  {/* Update button end */}
+
+
+
+
+
                   <td>
                     <button onClick={() => handleDeleteItems(item)} className="btn btn-ghost btn-lg">
                       <FaTrashAlt className='text-red-600'></FaTrashAlt>

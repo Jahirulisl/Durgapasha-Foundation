@@ -1,7 +1,7 @@
  import axios from "axios";
 
 const axiospublic = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://education-foundation-server.vercel.app',
 })
 const useAxiosPublic = () => {
     return axiospublic;
