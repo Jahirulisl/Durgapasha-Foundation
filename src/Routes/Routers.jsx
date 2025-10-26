@@ -1,5 +1,5 @@
- 
- import {createBrowserRouter} from "react-router-dom";
+
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../Pages/Home/Home/Home";
 import Main from "../Layout/Main";
 import Menu from "../Pages/Menu/Menu/Menu";
@@ -20,29 +20,29 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    children:[
+    children: [
       {
-        path:"/",
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>
       },
       {
-        path:"menu",
-        element:<Menu></Menu>
+        path: "menu",
+        element: <Menu></Menu>
       },
       {
         path: "ordergift",
         element: <OrderGift></OrderGift>
       },
       {
-        path:'login',
-        element:<Login></Login>
+        path: 'login',
+        element: <Login></Login>
       },
       {
-        path:'signup',
+        path: 'signup',
         element: <SignUp></SignUp>,
       },
       {
-        path:'secret',
+        path: 'secret',
         element: <PrivateRoute>
           <Secrte></Secrte>
         </PrivateRoute>
@@ -50,34 +50,40 @@ export const router = createBrowserRouter([
     ]
   },
   {
-    path:'deshboard',
-    element:<PrivateRoute><Deshboard></Deshboard></PrivateRoute>,
-    children:[
+    path: 'deshboard',
+    element: <PrivateRoute><Deshboard></Deshboard></PrivateRoute>,
+    children: [
       //normal users routes
       {
-        path:'cart',
-        element:<Cart></Cart>,
+        path: 'cart',
+        element: <Cart></Cart>,
       },
       //admin only routes
       {
-       path:'addItems',
-       element:<AdminRoute>
-        <AddItems></AddItems>
-       </AdminRoute>
-      },
-      {
-        path:'manageitems',
-        element:<AdminRoute><ManageItems></ManageItems></AdminRoute>
-      },
-      {
-        path:'updateItem/:id',
-        element:<AdminRoute>
-          <UpdateItem></UpdateItem>
+        path: 'addItems',
+        element: <AdminRoute>
+          <AddItems></AddItems>
         </AdminRoute>
       },
       {
-        path:'allusers',
-        element:<AdminRoute>
+        path: 'manageitems',
+        element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+      },
+      {
+        path: 'updateItem/:id',
+        element: <AdminRoute><UpdateItem /></AdminRoute>,
+        loader: async ({ params }) => {
+          // params.id = URL থেকে আইডি
+          const res = await fetch(`https://education-foundation-server.vercel.app/menu/${params.id}`);
+          if (!res.ok) throw new Error('Item not found');
+          const data = await res.json();
+          return data; // এই data useLoaderData() তে যাবে
+        }
+      },
+
+      {
+        path: 'allusers',
+        element: <AdminRoute>
           <AllUsers></AllUsers>
         </AdminRoute>
       }

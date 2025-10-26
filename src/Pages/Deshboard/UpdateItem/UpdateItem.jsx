@@ -13,8 +13,9 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hostion_ke
 //import imgbb  hosting url end
 
 const UpdateItem = () => {
-  const item = useLoaderData() || {};
-  const {name, category, recipe, price,_id} = item;
+ const data = useLoaderData();
+const item = data || {};
+const { name, category, recipe, price, _id } = item;
   const { register, handleSubmit, reset } = useForm();
   //for axiosPublic
    const axiosPublic = useAxiosPublic();
