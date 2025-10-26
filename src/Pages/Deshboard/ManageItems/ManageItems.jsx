@@ -95,16 +95,14 @@ const ManageItems = () => {
 
                   {/* Update button start */}
 
-                  
-                    <td>
-                      <Link to={`/dashboard/updateItem/${item._id}`}>
-                        <button className="btn btn-ghost btn-lg bg-orange-500 hover:bg-orange-100">
-                          <FaEdit className='text-white '></FaEdit>
-                        </button>
-                      </Link>
-                    </td>
+                  <td>
+                    <Link to={`/deshboard/updateitem/${item._id}`}>
+                      <button className="btn btn-ghost btn-lg bg-orange-500 hover:bg-orange-100">
+                        <FaEdit className="text-white" />
+                      </button>
+                    </Link>
+                  </td>
 
-                  
 
                   {/* Update button end */}
 

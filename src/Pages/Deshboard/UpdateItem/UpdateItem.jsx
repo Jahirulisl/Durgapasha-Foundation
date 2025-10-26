@@ -1,10 +1,10 @@
  import { useLoaderData } from "react-router-dom";
-import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import useAxiosSecur from "../../../hooks/useAxiosSecur";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import SectionTitle from "../../../Components/SectionTitle";
+import useAxiosSecur from "../../../hooks/useAxiosSecure";
 
 //import imgbb  hosting url start
 const image_hostion_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -13,7 +13,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hostion_ke
 //import imgbb  hosting url end
 
 const UpdateItem = () => {
-  const {name, category, recipe, price,_id} = useLoaderData();
+  const item = useLoaderData() || {};
+  const {name, category, recipe, price,_id} = item;
   const { register, handleSubmit, reset } = useForm();
   //for axiosPublic
    const axiosPublic = useAxiosPublic();
