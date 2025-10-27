@@ -1,4 +1,4 @@
- import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -13,15 +13,17 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hostion_ke
 //import imgbb  hosting url end
 
 const UpdateItem = () => {
- const data = useLoaderData();
-const item = data || {};
-const { name, category, recipe, price, _id } = item;
+  const data = useLoaderData(); // Loader থেকে data আসে
+  if (!data) return <p>Loading...</p>; // Safety check
+
+  const { name, category, recipe, price, _id } = data;
+
   const { register, handleSubmit, reset } = useForm();
   //for axiosPublic
-   const axiosPublic = useAxiosPublic();
-   //for  axiosSecqure 
+  const axiosPublic = useAxiosPublic();
+  //for  axiosSecqure 
   const axiosSecqure = useAxiosSecur();
-  
+
   //for submit 
   const onSubmit = async (data) => {
     console.log(data)
@@ -99,7 +101,7 @@ const { name, category, recipe, price, _id } = item;
                 <span>Price</span>
               </label>
               <input type="number" defaultValue={price}
-              placeholder='Price'
+                placeholder='Price'
                 {...register('price', { required: true })}
                 className='input input-bordered w-full ' />
             </div>
