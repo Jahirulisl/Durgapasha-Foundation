@@ -70,15 +70,30 @@ export const router = createBrowserRouter([
         element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
       },
       {
-        path: 'updateitem/:id',
-        element: (<AdminRoute>
-          <UpdateItem></UpdateItem>
-        </AdminRoute>),
-        loader: ({ params }) => fetch(`https://education-foundation-server.vercel.app/menu/${params.id}`, {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem('access-token')}`,
-          },
-        })
+        path: 'updateItem/:id',
+        element: <AdminRoute><UpdateItem /></AdminRoute>,
+        loader: async ({ params }) => {
+          try {
+            const token = localStorage.getItem('access-token'); // login সময় save করা token
+            const res = await fetch(`https://education-foundation-server.vercel.app/menu/${params.id}`, {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            });
+
+            if (!res.ok) {
+              throw new Error('Unauthorized or item not found');
+            }
+
+            const data = await res.json();
+            return data;
+          } catch (error) {
+            console.error(error);
+            throw new Error(error.message);
+          }
+        },
+        errorElement: <div className="text-center text-red-600 text-lg font-semibold"> 
+        </div>
       },
       {
         path: 'allusers',

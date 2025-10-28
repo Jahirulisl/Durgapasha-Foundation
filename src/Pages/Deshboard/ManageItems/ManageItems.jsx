@@ -94,7 +94,6 @@ const ManageItems = () => {
                   </td> */}
 
                   {/* Update button start */}
-
                   <td>
                     <Link to={`/deshboard/updateitem/${item._id}`}>
                       <button className="btn btn-ghost btn-lg bg-orange-500 hover:bg-orange-100">
