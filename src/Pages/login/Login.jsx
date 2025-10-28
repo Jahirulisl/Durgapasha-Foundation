@@ -56,6 +56,16 @@ const Login = () => {
         //foro go home page use navigate
         navigate(from,{replace: true});
       })
+       .catch(error => {
+      // ⚠️ Step 2: এরর ধরো
+      console.error("Login error:", error.code, error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    });
+
 
   }
 
