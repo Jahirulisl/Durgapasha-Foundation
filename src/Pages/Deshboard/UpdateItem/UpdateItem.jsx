@@ -45,7 +45,7 @@ const UpdateItem = () => {
       }
       //now send the menu item data to the server with the image end
       //
-      const menuRes = await axiosSecqure.patch(`/menu/${_id}`, menuItem);
+      const menuRes = await axiosSecqure.put(`/menu/${_id}`, menuItem);
       console.log(menuRes.data)
       if (menuRes.data.insertedId) {
         //show POPup 
